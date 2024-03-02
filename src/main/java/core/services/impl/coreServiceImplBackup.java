@@ -1,9 +1,9 @@
-package com.services.impl;
+package core.services.impl;
 
-import com.dtos.DogDto;
-import com.entities.Dog;
-import com.repositories.DogRepository;
-import com.services.DogService;
+import core.dtos.DogDto;
+import core.entities.Dog;
+import core.repositories.DogRepository;
+import core.services.coreService;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -11,16 +11,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service("dogService")
-public class DogServiceImpl implements DogService {
+public class coreServiceImplBackup implements coreService {
 
 	private final DogRepository dogRepository;
 
-    public DogServiceImpl(DogRepository dogRepository){
+    public coreServiceImplBackup(DogRepository dogRepository){
         this.dogRepository = dogRepository;
     }
 
     @Override
-    public DogDto saveDog(DogDto dogDto) {
+    public DogDto getAllEvents(DogDto dogDto) {
         // Converts the dto to the dog entity
         Dog dog = dogDtoToEntity(dogDto);
         // Save the dog entity
@@ -30,13 +30,13 @@ public class DogServiceImpl implements DogService {
     }
 
     @Override
-    public DogDto getDogById(Long dogId) {
+    public DogDto getEventById(Long dogId) {
         Dog dog = dogRepository.findById(dogId).orElseThrow(() -> new EntityNotFoundException("Dog not found"));
         return dogEntityToDto(dog);
     }
 
     @Override
-    public boolean deleteDog(Long dogId) {
+    public boolean getCommentById(Long dogId) {
         dogRepository.deleteById(dogId);
         return true;
     }

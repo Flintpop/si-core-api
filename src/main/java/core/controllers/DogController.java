@@ -1,9 +1,8 @@
-package com.controllers;
+package core.controllers;
 
-import com.dtos.DogDto;
+import core.dtos.DogDto;
+import core.services.impl.coreServiceImpl;
 import org.springframework.web.bind.annotation.*;
-
-import com.services.impl.DogServiceImpl;
 
 import java.util.List;
 
@@ -11,9 +10,9 @@ import java.util.List;
 @RequestMapping("/dogs")
 public class DogController {
 	
-	private final DogServiceImpl dogService;
+	private final coreServiceImpl dogService;
 
-	public DogController(DogServiceImpl dogService) {
+	public DogController(coreServiceImpl dogService) {
 		this.dogService = dogService;
 	}
 
@@ -31,7 +30,7 @@ public class DogController {
 	 */
 	@GetMapping("/{id}")
 	public DogDto getDog(@PathVariable Long id){
-		return dogService.getDogById(id);
+		return dogService.getEventById(id);
 	}
 
 	/**
@@ -39,7 +38,7 @@ public class DogController {
 	 */
 	@PostMapping
 	public DogDto saveDog(final @RequestBody DogDto dogDto){
-		return dogService.saveDog(dogDto);
+		return dogService.getAllEvents(dogDto);
 	}
 
 	/**
@@ -47,7 +46,7 @@ public class DogController {
 	 */
 	@DeleteMapping("/{id}")
 	public Boolean deleteDog(@PathVariable Long id){
-		return dogService.deleteDog(id);
+		return dogService.getCommentById(id);
 	}
 	
 }
