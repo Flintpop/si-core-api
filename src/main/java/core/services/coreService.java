@@ -1,6 +1,5 @@
 package core.services;
 
-import core.dtos.DogDto;
 import core.dtos.EventDto;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package core.dtos;
 
-import core.entities.Member;
+import core.entities.Membre;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -15,5 +15,5 @@ public class EventDto {
   private LocalDate dateHeureFin;
   private Long maxParticipant;
   private Long lieuId;
-  private List<Member> members = new ArrayList<>();
+  private List<Membre> membres = new ArrayList<>();
 }

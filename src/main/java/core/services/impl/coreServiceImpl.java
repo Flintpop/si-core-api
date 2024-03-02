@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service("dogService")
+@Service("coreService")
 public class coreServiceImpl implements coreService {
 
   @Override
