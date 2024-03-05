@@ -1,6 +1,6 @@
 package core.services;
 
-import core.dtos.CommentaireDto;
+import core.dtos.CommentaireDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import java.util.Arrays;
@@ -15,9 +15,9 @@ public class CommentaireService {
     this.restTemplate = restTemplate;
   }
 
-  public List<CommentaireDto> getAllCommentaires() {
-    String url = "http://localhost:8081/commentaires";
-    CommentaireDto[] commentairesArray = restTemplate.getForObject(url, CommentaireDto[].class);
+  public List<CommentaireDTO> getAllCommentaires() {
+    String url = "http://localhost:8081/commentaire";
+    CommentaireDTO[] commentairesArray = restTemplate.getForObject(url, CommentaireDTO[].class);
     return commentairesArray != null ? Arrays.asList(commentairesArray) : List.of();
   }
 }

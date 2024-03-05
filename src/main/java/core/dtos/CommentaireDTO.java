@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Setter
 @Getter
-public class CommentaireDto {
+public class CommentaireDTO {
 
   // Getters et Setters
   private Integer id;

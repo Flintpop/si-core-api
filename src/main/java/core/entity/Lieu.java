@@ -1,9 +1,9 @@
-package core.entities;
+package core.entity;
 
 import lombok.Getter;
 import lombok.Setter;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Setter
 @Getter

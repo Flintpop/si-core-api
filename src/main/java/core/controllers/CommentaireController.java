@@ -1,6 +1,6 @@
 package core.controllers;
 
-import core.dtos.CommentaireDto;
+import core.dtos.CommentaireDTO;
 import core.services.CommentaireService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +16,7 @@ public class CommentaireController {
   }
 
   @GetMapping("/commentaires")
-  public List<CommentaireDto> getAllCommentaires() {
+  public List<CommentaireDTO> getAllCommentaires() {
     return commentaireService.getAllCommentaires();
   }
 }

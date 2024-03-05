@@ -1,6 +1,6 @@
-package core.entities;
+package core.entity;
 
-import jakarta.persistence.Embeddable;
+import javax.persistence.Embeddable;
 import lombok.Getter;
 import lombok.Setter;
 

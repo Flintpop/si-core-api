@@ -1,6 +1,6 @@
-package core.entities;
+package core.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,12 +13,12 @@ public class Inscription {
   @Id
   @ManyToOne
   @JoinColumn(name = "membreId", referencedColumnName = "id")
-  private Membre membre;
+  private Membre membreId;
 
   @Id
   @ManyToOne
   @JoinColumn(name = "evenementId", referencedColumnName = "id")
-  private Evenement evenement;
+  private Evenement evenementId;
 
   @Column(name = "dateHeureInscription")
   private java.sql.Timestamp dateHeureInscription;

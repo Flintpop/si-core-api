@@ -1,4 +1,4 @@
-package core.entities;
+package core.entity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +9,7 @@ import java.util.Date;
 @Setter
 @Getter
 @Document(collection = "commentaires")
-public class CommentaireEntity {
+public class Commentaire {
 
   // Getters et Setters
   @Id
