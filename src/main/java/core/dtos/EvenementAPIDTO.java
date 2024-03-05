@@ -3,25 +3,30 @@ package core.dtos;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 public class EvenementAPIDTO {
   private int id;
-  private String nom;
-  private java.sql.Timestamp dateHeureDebut;
-  private java.sql.Timestamp dateHeureFin;
+  private String titre;
+  private LocalDateTime dateHeureDebut;
+  private LocalDateTime dateHeureFin;
+  private String description;
+  private int lieuId;
 
   public EvenementAPIDTO() {
   }
 
-  public EvenementAPIDTO(int id, String nom, java.sql.Timestamp dateHeureDebut, java.sql.Timestamp dateHeureFin, int maxParticipant, LieuDTO lieu) {
+  // Constructeur avec tous les attributs
+  public EvenementAPIDTO(int id, String titre, LocalDateTime dateHeureDebut, LocalDateTime dateHeureFin, String description, int lieuId) {
     this.id = id;
-    this.nom = nom;
+    this.titre = titre;
     this.dateHeureDebut = dateHeureDebut;
     this.dateHeureFin = dateHeureFin;
+    this.description = description;
+    this.lieuId = lieuId;
   }
+
   // Constructeurs, Getters et Setters
 }

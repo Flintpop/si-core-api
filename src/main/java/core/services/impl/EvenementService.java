@@ -37,13 +37,16 @@ public class EvenementService {
   private EvenementDTO convertToEvenementDTO(EvenementAPIDTO apiDto) {
     EvenementDTO dto = new EvenementDTO();
     dto.setId(apiDto.getId());
-    dto.setNom(apiDto.getNom());
+    dto.setTitre(apiDto.getTitre());
     dto.setDateHeureDebut(apiDto.getDateHeureDebut());
     dto.setDateHeureFin(apiDto.getDateHeureFin());
-    dto.setMaxParticipant(apiDto.getMaxParticipant());
 
     // Ajouter les informations sur le lieu
     LieuDTO lieu = getLieuById(apiDto.getLieuId());
+    if (lieu == null) {
+      // Si le lieu n'existe pas, on ne peut pas créer l'événement, donc faire un traitement d'erreur
+      return null; // Retourne null si le lieu n'existe pas
+    }
     dto.setLieu(lieu);
 
     // Ajouter la liste des membres inscrits
@@ -53,13 +56,15 @@ public class EvenementService {
     return dto;
   }
 
-  private LieuDTO getLieuById(Long lieuId) {
-    // Implémentez cette méthode pour récupérer les informations du lieu depuis une API externe ou une source de données
-    return new LieuDTO(); // Retourne un objet LieuDTO fictif pour l'exemple
+  private LieuDTO getLieuById(int lieuId) {
+    String lieuUrl = "http://si-lieu-api:8080/lieux/" + lieuId; // URL pour récupérer les informations d'un lieu
+    return restTemplate.getForObject(lieuUrl, LieuDTO.class);
   }
 
-  private List<MembreDTO> getInscriptionsByEvenementId(Long evenementId) {
-    // Implémentez cette méthode pour récupérer la liste des membres inscrits à un événement depuis une API externe ou une source de données
-    return List.of(); // Retourne une liste fictive de MembreDTO pour l'exemple
+  private List<MembreDTO> getInscriptionsByEvenementId(int evenementId) {
+    String evenementUrl = "http://si-event-api:8080/events/" + evenementId + "/membres"; // URL pour récupérer les membres inscrits à un événement
+    MembreDTO[] membresArray = restTemplate.getForObject(evenementUrl, MembreDTO[].class);
+    if (membresArray == null) return List.of();
+    return Arrays.asList(membresArray);
   }
 }

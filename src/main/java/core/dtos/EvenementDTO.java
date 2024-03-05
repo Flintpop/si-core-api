@@ -3,6 +3,7 @@ package core.dtos;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,23 +11,25 @@ import java.util.List;
 @Setter
 public class EvenementDTO {
   private int id;
-  private String nom;
-  private java.sql.Timestamp dateHeureDebut;
-  private java.sql.Timestamp dateHeureFin;
-  private int maxParticipant;
+  private String titre;
+  private LocalDateTime dateHeureDebut;
+  private LocalDateTime dateHeureFin;
+  private String description;
   private LieuDTO lieu;
   private List<MembreDTO> membresInscrits = new ArrayList<>();
 
   public EvenementDTO() {
   }
 
-  public EvenementDTO(int id, String nom, java.sql.Timestamp dateHeureDebut, java.sql.Timestamp dateHeureFin, int maxParticipant, LieuDTO lieu) {
+  // Constructeur avec tous les attributs
+  public EvenementDTO(int id, String titre, LocalDateTime dateHeureDebut, LocalDateTime dateHeureFin, String description, LieuDTO lieu, List<MembreDTO> membresInscrits) {
     this.id = id;
-    this.nom = nom;
+    this.titre = titre;
     this.dateHeureDebut = dateHeureDebut;
     this.dateHeureFin = dateHeureFin;
-    this.maxParticipant = maxParticipant;
+    this.description = description;
     this.lieu = lieu;
+    this.membresInscrits = membresInscrits;
   }
   // Constructeurs, Getters et Setters
 }
