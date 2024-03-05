@@ -1,6 +1,6 @@
 package core.services.impl;
 
-import core.dtos.EventDto;
+import core.dtos.EvenementDTO;
 import core.services.coreService;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +10,7 @@ import java.util.List;
 public class coreServiceImpl implements coreService {
 
   @Override
-  public List<EventDto> getAllComingEvents() {
+  public List<EvenementDTO> getAllComingEvents() {
     return null;
   }
 

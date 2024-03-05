@@ -1,29 +1,30 @@
 package core.entities;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
-import lombok.Data;
-
+@Getter
+@Setter
 @Entity
-@Data
+@Table(name = "evenement")
 public class Evenement {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int id;
 
-  @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
   private String nom;
-  private LocalDate dateHeureDebut;
-  private LocalDate dateHeureFin;
-  private Long maxParticipant;
-  private Long lieuId;
-  @ManyToMany
-  @JoinTable(
-          name = "inscription",
-          joinColumns = @JoinColumn(name = "evenementId"),
-          inverseJoinColumns = @JoinColumn(name = "membreId")
-  )
-  private List<Membre> membres = new ArrayList<>();
+
+  @Column(name = "dateHeureDebut")
+  private java.sql.Timestamp dateHeureDebut;
+
+  @Column(name = "dateHeureFin")
+  private java.sql.Timestamp dateHeureFin;
+
+  private int maxParticipant;
+
+  @ManyToOne
+  @JoinColumn(name = "lieuId", referencedColumnName = "id")
+  private Lieu lieu;
 }

@@ -1,6 +1,6 @@
 package core.services;
 
-import core.dtos.EventDto;
+import core.dtos.EvenementDTO;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ public interface coreService {
 //
 //    DogDto getEventById(Long dogId);
 
-    List<EventDto> getAllComingEvents();
+    List<EvenementDTO> getAllComingEvents();
 
     boolean getCommentsByEventId(Long eventId);
 

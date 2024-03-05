@@ -1,23 +1,26 @@
 package core.entities;
 
-import java.time.LocalDate;
-import java.util.List;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.*;
 
-import lombok.Data;
-
+@Getter
+@Setter
 @Entity
-@Data
+@Table(name = "membre", uniqueConstraints = {@UniqueConstraint(columnNames = {"nom", "prenom"})})
 public class Membre {
-  @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int id;
+
   private String nom;
   private String prenom;
-  private LocalDate dateNaissance;
+
+  @Column(name = "dateNaissance")
+  private java.sql.Date dateNaissance;
+
   private String adresse;
   private String email;
   private String motDePasse;
-  @ManyToMany(mappedBy = "membres")
-  private List<Evenement> evenements; // Liste des événements associés à ce membre
 }
