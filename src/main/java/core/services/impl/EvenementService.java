@@ -51,6 +51,10 @@ public class EvenementService {
 
     // Ajouter la liste des membres inscrits
     List<MembreDTO> membresInscrits = getInscriptionsByEvenementId(apiDto.getId());
+    if (membresInscrits.isEmpty()) {
+      // Si aucun membre n'est inscrit, on ne peut pas créer l'événement, donc faire un traitement d'erreur
+      return null; // Retourne null si aucun membre n'est inscrit
+    }
     dto.setMembresInscrits(membresInscrits);
 
     return dto;
