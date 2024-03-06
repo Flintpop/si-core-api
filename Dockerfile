@@ -1,5 +1,5 @@
 # Utiliser une image de base avec Java (précisez la version de Java selon vos besoins)
-FROM openjdk:11-jdk
+FROM openjdk:17-jdk
 
 # Ajouter un label pour maintenir votre image
 LABEL maintainer="nom@example.com"

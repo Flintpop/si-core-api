@@ -28,5 +28,4 @@ public class EvenementAPIDTO {
     this.lieuId = lieuId;
   }
 
-  // Constructeurs, Getters et Setters
 }
