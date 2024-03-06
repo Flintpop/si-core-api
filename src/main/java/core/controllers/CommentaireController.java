@@ -1,7 +1,7 @@
 package core.controllers;
 
-import core.dtos.CommentaireDTO;
 import core.services.impl.CommentaireService;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,33 +21,34 @@ public class CommentaireController {
   }
 
   @GetMapping
-  public ResponseEntity<?> getAllCommentaires() {
-    return commentaireService.forwardGetRequest("", CommentaireDTO[].class);
+  public ResponseEntity<String> getAllCommentaires() {
+    return commentaireService.forwardRequest("", HttpMethod.GET, null);
   }
 
   @GetMapping("/evenement/{evenementId}")
-  public ResponseEntity<?> getCommentairesParEvenementId(@PathVariable int evenementId) {
-    return commentaireService.forwardGetRequest("/evenement/" + evenementId, CommentaireDTO[].class);
+  public ResponseEntity<String> getCommentairesParEvenementId(@PathVariable int evenementId) {
+    return commentaireService.forwardRequest("/evenement/" + evenementId, HttpMethod.GET, null);
   }
 
   @PostMapping
-  public ResponseEntity<?> addCommentaire(HttpServletRequest request) throws IOException {
+  public ResponseEntity<String> addCommentaire(HttpServletRequest request) throws IOException {
     String requestBody = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
-    return commentaireService.forwardPostRequest("", requestBody, String.class);
+    return commentaireService.forwardRequest("", HttpMethod.POST, requestBody);
   }
 
   @GetMapping("/{commentaireId}")
-  public ResponseEntity<?> getCommentaireById(@PathVariable int commentaireId) {
-    return commentaireService.forwardGetRequest("/" + commentaireId, CommentaireDTO.class);
+  public ResponseEntity<String> getCommentaireById(@PathVariable int commentaireId) {
+    return commentaireService.forwardRequest("/" + commentaireId, HttpMethod.GET, null);
   }
 
   @PutMapping("/{commentaireId}")
-  public ResponseEntity<?> updateCommentaire(@PathVariable int commentaireId, @RequestBody CommentaireDTO commentaire) {
-    return commentaireService.forwardPutRequest("/" + commentaireId, commentaire, CommentaireDTO.class);
+  public ResponseEntity<String> updateCommentaire(@PathVariable int commentaireId, HttpServletRequest request) throws IOException {
+    String requestBody = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+    return commentaireService.forwardRequest("/" + commentaireId, HttpMethod.PUT, requestBody);
   }
 
   @DeleteMapping("/{commentaireId}")
-  public ResponseEntity<?> deleteCommentaire(@PathVariable int commentaireId) {
-    return commentaireService.forwardDeleteRequest("/" + commentaireId);
+  public ResponseEntity<String> deleteCommentaire(@PathVariable int commentaireId) {
+    return commentaireService.forwardRequest("/" + commentaireId, HttpMethod.DELETE, null);
   }
 }
