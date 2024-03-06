@@ -1,10 +1,16 @@
 package core.services.impl;
 
 import core.dtos.CommentaireDTO;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.ResponseEntity;
+import core.dtos.CommentairePostDTO;
+import org.springframework.http.*;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
+
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,6 +19,7 @@ public class CommentaireService {
 
   private final RestTemplate restTemplate;
   private final String baseUrl = "http://commentaire-api:8080/commentaire";
+//  private final String baseUrl = "http://localhost:8081/commentaire";
 
   public CommentaireService(RestTemplate restTemplate) {
     this.restTemplate = restTemplate;
@@ -37,9 +44,20 @@ public class CommentaireService {
     }
   }
 
-  public ResponseEntity<CommentaireDTO> addCommentaire(CommentaireDTO commentaire) {
-    HttpEntity<CommentaireDTO> request = new HttpEntity<>(commentaire);
-    return restTemplate.postForEntity(baseUrl, request, CommentaireDTO.class);
+  public ResponseEntity<String> forwardRequest(String rawRequestBody) {
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(new MediaType("application", "json", StandardCharsets.UTF_8));
+
+    HttpEntity<String> requestEntity = new HttpEntity<>(rawRequestBody, headers);
+    try {
+      return restTemplate.exchange(baseUrl, HttpMethod.POST, requestEntity, String.class);
+    } catch (HttpClientErrorException | HttpServerErrorException ex) {
+      // Ici, on ajoute également les headers à la réponse d'erreur
+      return ResponseEntity.status(ex.getStatusCode()).headers(headers).body(ex.getResponseBodyAsString());
+    } catch (Exception e) {
+      // Ici, pour les autres exceptions, on ajoute aussi les headers
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).headers(headers).body(e.getMessage());
+    }
   }
 
   public ResponseEntity<CommentaireDTO> getCommentaireById(int commentaireId) {

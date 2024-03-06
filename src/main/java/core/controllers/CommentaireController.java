@@ -5,8 +5,12 @@ import core.services.impl.CommentaireService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/commentaire")
 public class CommentaireController {
@@ -28,8 +32,9 @@ public class CommentaireController {
   }
 
   @PostMapping
-  public ResponseEntity<CommentaireDTO> addCommentaire(@RequestBody CommentaireDTO commentaire) {
-    return commentaireService.addCommentaire(commentaire);
+  public ResponseEntity<String> addCommentaire(HttpServletRequest request) throws IOException {
+    String requestBody = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+    return commentaireService.forwardRequest(requestBody);
   }
 
   @GetMapping("/{commentaireId}")

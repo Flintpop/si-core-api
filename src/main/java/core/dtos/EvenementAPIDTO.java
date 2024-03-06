@@ -17,8 +17,6 @@ public class EvenementAPIDTO {
 
   public EvenementAPIDTO() {
   }
-
-  // Constructeur avec tous les attributs
   public EvenementAPIDTO(int id, String titre, LocalDateTime dateHeureDebut, LocalDateTime dateHeureFin, String description, int lieuId) {
     this.id = id;
     this.titre = titre;

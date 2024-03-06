@@ -1,5 +1,6 @@
 package core;
 
+import errors.PassthroughErrorHandler;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -15,6 +16,8 @@ public class App {
 
     @Bean
     public RestTemplate restTemplate() {
-        return new RestTemplate();
+      RestTemplate restTemplate = new RestTemplate();
+      restTemplate.setErrorHandler(new PassthroughErrorHandler());
+      return restTemplate;
     }
 }
